@@ -1,0 +1,25 @@
+* asdf-readtables
+
+** Defsystem with specified readtable
+
+: (asdf-readtables:defsystem/readtable :foo
+:   :readtable :foo
+:   ...)
+: 
+: ==>
+: (ASDF/DEFSYSTEM:DEFSYSTEM :FOO
+:   :DEFSYSTEM-DEPENDS-ON (:NAMED-READTABLES)
+:   :CLASS ASDF-READTABLES:SYSTEM/READTABLE
+:   :READTABLE :FOO
+:   ...)
+
+
+** Change readtable and reload system
+: (change-class (asdf:find-system :bar)
+:               'asdf-readtables:system/readtable
+:               :readtable :bar)
+
+
+** Get back to normal readtable.
+
+: (change-class (asdf:find-system :bar) 'asdf:system)
